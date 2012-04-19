@@ -1,14 +1,10 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-startseite 
-<a href="{{path('foo')}}">LinkS</a>
 <div id="gallery">
-  <a title="bild nummer 1" href="img/image1.jpg"><img src="img/thumb_image1.jpg" /></a>
-  <a title="bild nummer 1" href="img/image1.jpg"><img src="img/thumb_image1.jpg" /></a>
-  <a title="bild nummer 1" href="img/image1.jpg"><img src="img/thumb_image1.jpg" /></a>
-  <a title="bild nummer 1" href="img/image1.jpg"><img src="img/thumb_image1.jpg" /></a>
-  
+  {% for image in images %}
+    <a title="bild nummer 1" rel="shadowbox[wvm]" href="photos/{{image.filename}}"><img src="photos/{{image.thumbname}}" /></a>
+  {% endfor %}
 </div>
 {% endblock %}
 
