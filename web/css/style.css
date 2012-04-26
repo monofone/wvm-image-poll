@@ -225,7 +225,7 @@ div.voted{
   color: white;
   font-size: 18px;
   font-weight: bold;
-  /*background: url(/wvm-image-poll/web/images/next.png) transparent 5px 5px;*/
+  /*background: url(/images/next.png) transparent 5px 5px;*/
 }
 div.voted a{
   z-index: 1;

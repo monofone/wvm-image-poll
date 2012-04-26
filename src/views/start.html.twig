@@ -5,7 +5,7 @@
   {% for image in images %}
     <div>
       {% if image.userVoted %}<div class="voted">das will ich</div> {% endif %}
-      <a href="{{path('image', { 'imageId': image.imageid})}}"><img src="/wvm-image-poll/web/photos/{{image.thumbname}}" /></a>
+      <a href="{{path('image', { 'imageId': image.imageid})}}"><img src="/photos/{{image.thumbname}}" /></a>
     </div>
   {% endfor %}
 </div>

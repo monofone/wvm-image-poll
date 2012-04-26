@@ -1,13 +1,13 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-<img width="700" src="http://{{ app.request.host }}/wvm-image-poll/web/photos/{{view.filename}}" /></a>
+<img width="700" src="http://{{ app.request.host }}/photos/{{view.filename}}" /></a>
 <div id="image_side">
   <p>Um für dieses Bild abzustimmen einfach auf den Button "Das will Ich" klicken.</p>
   <p>Es stehen noch <span id="voted_count">{{view.remainingVotes}}</span> von {{view.maxVotes}} Stimmen zur Verfügung</p>
   <p>Nach dem Abstimmen <a href="{{ path('start') }}">zurück zur Übersicht</a></p>
   <p>{% if not view.userVoted and view.remainingVotes != 0 %}
-      <a title="für dieses Bild Abstimmen" href="{{path('vote_image', {'imageId': view.imageId})}}" class="vote_link" id="{{view.imageid}}"><img src="/wvm-image-poll/web/images/will_ich.png" alt="für dieses Bild Abstimmen"/></a>
+      <a title="für dieses Bild Abstimmen" href="{{path('vote_image', {'imageId': view.imageId})}}" class="vote_link" id="{{view.imageid}}"><img src="/images/will_ich.png" alt="für dieses Bild Abstimmen"/></a>
     {% endif %}<br > <br >
   </p>
   <p>Für dieses Bild wurde <span id="voted_not">{% if not view.userVoted %}bisher nicht{%else%}bereits{% endif %}</span> abgestimmt</p>
