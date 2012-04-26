@@ -18,3 +18,31 @@ window.log = function(){
 
 // place any jQuery/helper plugins in here, instead of separate, slower script files.
 
+(function($){
+  $.fn.imageVote = function(){
+    actionLink = this;
+
+    function handleClick(e){
+
+      e.preventDefault();
+
+      url = actionLink.attr('href');
+      $.ajax({
+        url: url,
+        success: updateData
+      });
+    }
+    function updateData(response){
+      data = jQuery.parseJSON(response);
+      if(data.voted){
+        $('#voted_not').hide();
+        $('#voted_count').text(data.countedVotes);
+        actionLink.hide();
+      }else{
+        alert('an error occured');
+      }
+
+    }
+    actionLink.click(handleClick);
+  }
+})(jQuery);

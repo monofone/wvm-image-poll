@@ -5,11 +5,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 // Create the application
 $app = new Application();
+$app['autoloader']->registerNamespaceFallback(__DIR__);
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options'            => array(
         'driver'    => 'pdo_sqlite',
-        'path'      => __DIR__.'/app.db',
+        'path'      => __DIR__.'/app.sqlite',
     ),
     'db.dbal.class_path'    => __DIR__.'/vendor/doctrine2-dbal/lib',
     'db.common.class_path'  => __DIR__.'/vendor/doctrine2-common/lib',
@@ -20,6 +21,8 @@ $app->register(new Silex\Provider\SymfonyBridgesServiceProvider(), array(
 ));
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
+$app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path'       => __DIR__.'/views',
@@ -48,7 +51,15 @@ if ('dev' == $env) {
     $app['debug'] = true;
     //$app['my.param'] = '...';
 }
+/* @var $app Silex\Application */
+$app['max_votes'] = 5;
+$app['imageService'] = $app->share(function() use ($app){
+    return new Blage\ImageService($app['db'], array('max_votes' => $app['max_votes']));
+});
 
+$app['userhandler'] = $app->share(function() use ($app){
+    return new Blage\UserManager($app['db'], $app['session']);
+});
 // Error handling
 $app->error(function (\Exception $ex, $code) use ($app) {
 

@@ -1,6 +1,7 @@
 #SetEnv SILEX_ENV "dev"
 
 RewriteEngine On
+RewriteBase   /wvm-image-poll/web/
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php [QSA,L]
